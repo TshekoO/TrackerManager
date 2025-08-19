@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TaskForm } from '../task-form/task-form';
+
+import { TaskService } from '../../services/task.service';
+import { Subscription } from 'rxjs';
 
 interface Task {
   id: number;
@@ -18,18 +21,27 @@ interface Task {
   templateUrl: './task-list.html',
   styleUrls: ['./task-list.scss']
 })
-export class TaskList {
+export class TaskList implements OnInit, OnDestroy {
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
   filterPriority: string = '';
   filterCompleted: string = '';
+  private reloadSub?: Subscription;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private taskService: TaskService) {}
+
+  ngOnInit() {
     this.loadTasks();
+    this.reloadSub = this.taskService.reload$.subscribe(() => {
+      this.loadTasks();
+    });
+  }
+
+  ngOnDestroy() {
+    this.reloadSub?.unsubscribe();
   }
 
   loadTasks() {
-    // Replace with your backend API URL
     this.http.get<Task[]>('/api/tasks').subscribe(data => {
       this.tasks = data;
       this.applyFilters();

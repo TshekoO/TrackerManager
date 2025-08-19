@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { TaskService } from '../../services/task.service';
+
 @Component({
   selector: 'app-task-form',
   standalone: true,
@@ -14,7 +16,7 @@ export class TaskForm {
   title: string = '';
   priority: string = 'Medium';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private taskService: TaskService) {}
 
   createTask() {
     const newTask = {
@@ -22,11 +24,10 @@ export class TaskForm {
       priority: this.priority,
       completed: false
     };
-    // Replace with your backend API URL
     this.http.post('/api/tasks', newTask).subscribe(() => {
       this.title = '';
       this.priority = 'Medium';
-      // Optionally, trigger reload in TaskList
+      this.taskService.triggerReload();
     });
   }
 }
