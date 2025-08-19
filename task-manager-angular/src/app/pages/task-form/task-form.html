@@ -1,1 +1,16 @@
-<p>task-form works!</p>
+<div>
+	<h2>Create New Task</h2>
+	<form (ngSubmit)="createTask()">
+		<label>Title:
+			<input [(ngModel)]="title" name="title" required />
+		</label>
+		<label>Priority:
+			<select [(ngModel)]="priority" name="priority">
+				<option value="High">High</option>
+				<option value="Medium">Medium</option>
+				<option value="Low">Low</option>
+			</select>
+		</label>
+		<button type="submit">Add Task</button>
+	</form>
+</div>
