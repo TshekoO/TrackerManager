@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TaskForm } from '../task-form/task-form';
 
 interface Task {
   id: number;
@@ -13,7 +14,7 @@ interface Task {
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, TaskForm],
   templateUrl: './task-list.html',
   styleUrls: ['./task-list.scss']
 })
