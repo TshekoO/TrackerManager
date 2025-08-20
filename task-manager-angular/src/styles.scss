@@ -1,1 +1,61 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles: Orange & Yellow theme */
+$primary-orange: #ff9800;
+$accent-yellow: #ffeb3b;
+$background: #fff8e1;
+$text-dark: #333;
+
+body {
+	background: $background;
+	color: $text-dark;
+	font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $primary-orange;
+	margin-bottom: 0.5em;
+}
+
+a {
+	color: $primary-orange;
+	text-decoration: none;
+	&:hover {
+		color: $accent-yellow;
+		text-decoration: underline;
+	}
+}
+
+button, .btn {
+	background: $primary-orange;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 0.5em 1.2em;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background 0.2s;
+	&:hover {
+		background: $accent-yellow;
+		color: $text-dark;
+	}
+}
+
+.card {
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);
+	padding: 1.5em;
+	margin-bottom: 1.5em;
+	border-left: 6px solid $primary-orange;
+}
+
+input, textarea, select {
+	border: 1px solid $accent-yellow;
+	border-radius: 4px;
+	padding: 0.5em;
+	font-size: 1em;
+	margin-bottom: 1em;
+	width: 100%;
+	box-sizing: border-box;
+}
